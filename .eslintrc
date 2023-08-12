@@ -47,7 +47,8 @@
       }
     }],
     "eol-last": "off",
-    "@typescript-eslint/prefer-nullish-coalescing": "off"
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/triple-slash-reference": "warn"
 	},
 	"extends": [
 		"next",

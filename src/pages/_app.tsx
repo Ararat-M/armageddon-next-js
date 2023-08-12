@@ -1,9 +1,6 @@
-import type { AppProps as nextAppProps } from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
-
-interface AppProps extends nextAppProps {
-  title?: string;
-}
+import "@/styles/global.scss";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
