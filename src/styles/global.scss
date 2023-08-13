@@ -3,7 +3,8 @@
 
 .app {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   padding-top: 10px;
   background-color: var(--bg-app);
   min-height: 100vh;
@@ -11,4 +12,16 @@
   font: var(--font-main);
   background-repeat: no-repeat;
   background-position: left top 138px;
+}
+
+.asteroid-list {
+  margin: 0 auto;
+}
+
+.my-img {
+  position: fixed;
+  left: -73px;
+  top: 138px;
+  top: 0;
+  transition: top 0.2s ease-in-out
 }
