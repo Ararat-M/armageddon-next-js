@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { type AsteroidSchema, asteroidService } from "@/entities/Asteroid";
-import { AsteroidItem } from "@/widgets/AsteroidItem/";
 import { AsteroidList } from "@/widgets/AsteroidList";
+import { formatDateForApi } from "@/shared/lib/formatDateForApi/formatDateForApi";
 
 interface IndexProps {
   asteroids: AsteroidSchema[];
@@ -35,13 +35,9 @@ export default function Index({ asteroids }: IndexProps) {
 }
 
 export async function getServerSideProps() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
-  const formattedDate = `${year}-${month}-${day}`;
+  const date = formatDateForApi(new Date());
 
-  const asteroids = await asteroidService.getByDate(formattedDate);
+  const asteroids = await asteroidService.getByDate(date);
 
   return {
     props: {

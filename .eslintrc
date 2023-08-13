@@ -48,7 +48,8 @@
     }],
     "eol-last": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
-    "@typescript-eslint/triple-slash-reference": "warn"
+    "@typescript-eslint/triple-slash-reference": "warn",
+    "multiline-ternary": ["off", "always"]
 	},
 	"extends": [
 		"next",

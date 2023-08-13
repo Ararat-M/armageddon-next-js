@@ -2,11 +2,13 @@
 @import "./variable";
 
 .app {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
   background-color: var(--bg-app);
   min-height: 100vh;
   color: var(--color-main);
   font: var(--font-main);
-  background-image: url("../shared/assets/images/planeta_zemlia_2560x1600.jpg");
   background-repeat: no-repeat;
   background-position: left top 138px;
 }
