@@ -1,16 +1,18 @@
 import type { AsteroidSchema } from "@/entities/Asteroid";
+import { formatDateForApi } from "@/shared/lib/formatDateForApi/formatDateForApi";
 
 const API_KEY = process.env.API_KEY;
 const API_URL = "https://api.nasa.gov/neo/rest/v1";
 
 export const asteroidService = {
-  async getByDate(date: string) {
-    const response = await fetch(`${API_URL}/feed?start_date=${date}&end_date=${date}&api_key=${API_KEY}`);
+  async getByDate(date: Date) {
+    const formatDate = formatDateForApi(date);
+    const response = await fetch(`${API_URL}/feed?start_date=${formatDate}&end_date=${formatDate}&api_key=${API_KEY}`);
     const data = await response.json();
 
     const asteroids: AsteroidSchema[] = [];
 
-    data.near_earth_objects[date].forEach((item: AsteroidSchema) => {
+    data.near_earth_objects[formatDate].forEach((item: AsteroidSchema) => {
       asteroids.push(item);
     });
 

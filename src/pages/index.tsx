@@ -8,34 +8,15 @@ interface IndexProps {
 }
 
 export default function Index({ asteroids }: IndexProps) {
-  const [sortedAsteroids, setSortedAsteroids] = useState([]);
-
-  useEffect(() => {
-    setSortedAsteroids(asteroids.sort(function (a, b) {
-      const aDate = a.close_approach_data[0].epoch_date_close_approach;
-      const bDate = b.close_approach_data[0].epoch_date_close_approach;
-
-      if (aDate > bDate) {
-        return 1;
-      }
-
-      if (aDate < bDate) {
-        return -1;
-      }
-
-      return 0;
-    }));
-  }, [asteroids]);
-
   return (
     <div className="app">
-      <AsteroidList asteroids={sortedAsteroids}></AsteroidList>
+      <AsteroidList asteroids={asteroids}></AsteroidList>
     </div>
   );
 }
 
 export async function getServerSideProps() {
-  const date = formatDateForApi(new Date());
+  const date = new Date();
 
   const asteroids = await asteroidService.getByDate(date);
 

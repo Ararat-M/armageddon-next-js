@@ -20,7 +20,8 @@ export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
     distance: {
       lunar: formatNumber(asteroid.close_approach_data[0].miss_distance.lunar),
       kilometers: formatNumber(asteroid.close_approach_data[0].miss_distance.kilometers)
-    }
+    },
+    isDangerous: asteroid.is_potentially_hazardous_asteroid
   };
 
   return (
@@ -61,10 +62,12 @@ export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
         </div>
         <div className={classes["btns-area"]}>
           <Button >Заказать</Button>
-          <span className={classes.label}>
-            <span className={classes["colorful-symbol"]}>&#x26A0;&#xFE0F;</span>
-            Опасен
-          </span>
+          {formatData.isDangerous &&
+            <span className={classes.label}>
+              <span className={classes["colorful-symbol"]}>&#x26A0;&#xFE0F;</span>
+              Опасен
+            </span>
+          }
         </div>
       </div>
     </li>

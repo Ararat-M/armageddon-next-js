@@ -1,19 +1,31 @@
-import { type AsteroidSchema } from "@/entities/Asteroid";
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { asteroidService, type AsteroidSchema } from "@/entities/Asteroid";
 import { AsteroidItem } from "@/widgets/AsteroidItem";
 import { useState, useEffect } from "react";
 import classes from "./asteroidList.module.scss";
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
+import { useFetching } from "@/shared/hooks/useFetching";
 
 interface AsteroidListProps {
   asteroids: AsteroidSchema[];
 }
 
 export function AsteroidList({ asteroids }: AsteroidListProps) {
-  const [sortedAsteroids, setSortedAsteroids] = useState([]);
+  const [asteroidsArr, setAsteroidsArr] = useState<AsteroidSchema[]>(asteroids);
+  const [sortedAsteroids, setSortedAsteroids] = useState<AsteroidSchema[]>([]);
   const [isDistanceInKm, setIsDistanceInKm] = useState(true);
+  const [date, setDate] = useState(new Date());
+
+  const [isLoading, Error, fetchAsteroids] = useFetching(async () => {
+    const newDate = new Date(+date + 86400 * 1000);
+    const response = await asteroidService.getByDate(newDate);
+
+    setAsteroidsArr([...asteroidsArr, ...response]);
+    setDate(newDate);
+  });
 
   useEffect(() => {
-    setSortedAsteroids(asteroids.sort(function (a, b) {
+    setSortedAsteroids(asteroidsArr.sort(function (a, b) {
       const aDate = a.close_approach_data[0].epoch_date_close_approach;
       const bDate = b.close_approach_data[0].epoch_date_close_approach;
 
@@ -27,7 +39,7 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
 
       return 0;
     }));
-  }, [asteroids]);
+  }, [asteroidsArr]);
 
   return (
     <div className={classes.content}>
