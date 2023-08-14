@@ -1,24 +1,22 @@
 .clear {
-  padding: 0;
-  margin: 0;
   border: none;
   background: none;
   outline: none;
   text-decoration: underline;
-}
-
-.active {
-  text-decoration: none;
-  font-weight: 700;
+  
+  &.active {
+    text-decoration: none;
+    font-weight: 700;
+  }
 }
 
 .primary {
-  font-size: 11px;
-  line-height: 20px;
   font-weight: 700;
-  padding: 2px 11px;
-  margin: 0;
   background-color: var(--orange-base);
   border-radius: 16px;
   border: none;
+
+  &.smooth {
+    background-color: var(--orange-smooth);
+  }
 }

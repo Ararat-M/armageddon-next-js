@@ -10,6 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   theme?: ButtonTheme;
   isActive?: boolean;
+  isSmooth?: boolean;
 }
 
 export function Button({
@@ -17,6 +18,7 @@ export function Button({
   theme = ButtonTheme.PRIMARY,
   className = "",
   isActive,
+  isSmooth,
   ...props
 }: ButtonProps) {
   const additionalCls = [
@@ -24,7 +26,8 @@ export function Button({
   ];
 
   const mods = {
-    [classes.active]: isActive
+    [classes.active]: isActive,
+    [classes.smooth]: isSmooth
   };
 
   return (

@@ -3,7 +3,7 @@ import { useRef, useEffect, type MutableRefObject } from "react";
 export function useObserver(
   observerCallback: (entries: IntersectionObserverEntry[], observer: any) => void,
   observerTarget: MutableRefObject<any>,
-  isLoading: boolean = true
+  isLoading: boolean = false
 ) {
   const observer = useRef<IntersectionObserver>(null);
 

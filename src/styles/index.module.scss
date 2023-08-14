@@ -15,3 +15,10 @@
   transition: top 0.2s ease-in-out;
   z-index: var(--image-bg);
 }
+
+.basket {
+  position: fixed;
+  top: 132px;
+  right: 111px;
+  transition: top 0.2s ease-in-out;
+}

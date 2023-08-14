@@ -6,6 +6,9 @@ import { formatName } from "@/shared/lib/formatName/formatName";
 import { formatDateForUi } from "@/shared/lib/formatDateForUi/formatDateForUi";
 import { Button } from "@/shared/ui/Button/Button";
 import { formatNumber } from "@/shared/lib/formatNumber/formatNumber";
+import { useState } from "react";
+import { BUSKET_KEY } from "@/shared/const/localeStorage";
+import { classNames } from "@/shared/lib/classNames/classNames";
 
 interface AsteroidProps {
   asteroid: AsteroidSchema;
@@ -14,6 +17,7 @@ interface AsteroidProps {
 
 export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
   const formatData = {
+    id: asteroid.id,
     name: formatName(asteroid.name),
     date: formatDateForUi(asteroid.close_approach_data[0].close_approach_date),
     diameter: Math.round(asteroid.estimated_diameter.meters.estimated_diameter_max),
@@ -23,6 +27,13 @@ export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
     },
     isDangerous: asteroid.is_potentially_hazardous_asteroid
   };
+
+  const [inBusket, setInBusket] = useState<boolean>(false);
+
+  function btnHandler() {
+    setInBusket(true);
+    localStorage.setItem(BUSKET_KEY, formatData.id);
+  }
 
   return (
     <li className={classes.content}>
@@ -61,7 +72,13 @@ export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
           </div>
         </div>
         <div className={classes["btns-area"]}>
-          <Button >Заказать</Button>
+          <Button
+            className={classes.btn}
+            isSmooth={inBusket}
+            onClick={btnHandler}
+          >
+            Заказать
+          </Button>
           {formatData.isDangerous &&
             <span className={classes.label}>
               <span className={classes["colorful-symbol"]}>&#x26A0;&#xFE0F;</span>

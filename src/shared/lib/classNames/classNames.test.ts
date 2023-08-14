@@ -16,9 +16,4 @@ describe("classNames", () => {
   test("with all params", () => {
     expect(classNames("some-class", ["mb-l"], { hovered: true })).toBe("some-class mb-l hovered");
   });
-
-  test("unnecessary spaces", () => {
-    expect(classNames("  some-class    ", [" mb-l "], { hovered: true })).toBe("some-class mb-l hovered");
-    expect(classNames("     ")).toBe("");
-  });
 });

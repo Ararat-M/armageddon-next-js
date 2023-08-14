@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { asteroidService, type AsteroidSchema } from "@/entities/Asteroid";
 import { AsteroidItem } from "@/widgets/AsteroidItem";
 import { useState, useEffect, useRef } from "react";
@@ -7,6 +6,8 @@ import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
 import { useFetching } from "@/shared/hooks/useFetching";
 import { Loader } from "@/shared/ui/Loader/Loader";
 import { useObserver } from "@/shared/hooks/useObserver";
+
+const ONE_DAY_IN_MS = 86400000;
 
 interface AsteroidListProps {
   asteroids: AsteroidSchema[];
@@ -18,10 +19,9 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
   const [isDistanceInKm, setIsDistanceInKm] = useState(true);
   const [date, setDate] = useState(new Date());
   const observerTarget = useRef<HTMLDivElement | null>(null);
-  const observer = useRef<IntersectionObserver>(null);
 
   const [isLoading, Error, fetchAsteroids] = useFetching(async () => {
-    const newDate = new Date(+date + 86400 * 1000);
+    const newDate = new Date(+date + ONE_DAY_IN_MS);
     const response = await asteroidService.getByDate(newDate);
 
     setAsteroidsArr([...asteroidsArr, ...response]);
@@ -45,7 +45,7 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
     }));
   }, [asteroidsArr]);
 
-  useObserver((entries: IntersectionObserverEntry[], observer) => {
+  useObserver((entries) => {
     if (entries[0].isIntersecting) {
       fetchAsteroids();
     }

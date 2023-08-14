@@ -3,22 +3,26 @@ import { AsteroidList } from "@/widgets/AsteroidList";
 import Image from "next/image";
 import { useRef } from "react";
 import classes from "@/styles/index.module.scss";
-import { HeaderTitle } from "@/widgets/headerTitle";
+import { HeaderTitle } from "@/widgets/HeaderTitle";
+import { Basket } from "@/widgets/Basket";
 
 interface IndexProps {
   asteroids: AsteroidSchema[];
 }
 
 export default function Index({ asteroids }: IndexProps) {
-  const earthImage = useRef(null);
+  const earthImage = useRef<HTMLImageElement>(null);
+  const basketRef = useRef<HTMLDivElement>(null);
 
   function observerCallback (entries: IntersectionObserverEntry[]) {
     if (!entries[0].isIntersecting) {
       earthImage.current.style.top = "83px";
+      basketRef.current.style.top = "76px";
     }
 
     if (entries[0].isIntersecting) {
       earthImage.current.style.top = "138px";
+      basketRef.current.style.top = "138px";
     }
   }
 
@@ -37,8 +41,8 @@ export default function Index({ asteroids }: IndexProps) {
       <div className={classes["asteroid-list"]}>
         <AsteroidList asteroids={asteroids}></AsteroidList>
       </div>
-      <div style={{ position: "fixed", top: "134px", right: "-111px" }}>
-        corzina
+      <div ref={basketRef} className={classes.basket}>
+        <Basket count={1} />
       </div>
     </div>
   );
