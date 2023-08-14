@@ -1,0 +1,17 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.asteroid-list {
+  margin: 0 auto;
+}
+
+.my-img {
+  position: fixed;
+  left: -73px;
+  top: 138px;
+  transition: top 0.2s ease-in-out;
+  z-index: var(--image-bg);
+}

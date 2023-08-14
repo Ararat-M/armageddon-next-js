@@ -1,56 +1,40 @@
 import { type AsteroidSchema, asteroidService } from "@/entities/Asteroid";
 import { AsteroidList } from "@/widgets/AsteroidList";
 import Image from "next/image";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
+import classes from "@/styles/index.module.scss";
+import { HeaderTitle } from "@/widgets/headerTitle";
 
 interface IndexProps {
   asteroids: AsteroidSchema[];
 }
 
 export default function Index({ asteroids }: IndexProps) {
-  const observerTarget = useRef(null);
   const earthImage = useRef(null);
-  const observer = useRef<IntersectionObserver>(null);
 
-  useEffect(() => {
-    if (observer.current) observer.current.disconnect();
-
-    function callback (entries: IntersectionObserverEntry[], observer) {
-      if (!entries[0].isIntersecting) {
-        earthImage.current.style.top = "83px";
-      }
-
-      if (entries[0].isIntersecting) {
-        earthImage.current.style.top = "138px";
-      }
-
-      console.log("observer");
+  function observerCallback (entries: IntersectionObserverEntry[]) {
+    if (!entries[0].isIntersecting) {
+      earthImage.current.style.top = "83px";
     }
 
-    observer.current = new IntersectionObserver(callback);
-    observer.current.observe(observerTarget.current);
-  }, []);
+    if (entries[0].isIntersecting) {
+      earthImage.current.style.top = "138px";
+    }
+  }
 
   return (
-    <div className="app">
-      <div ref={observerTarget} style={{ height: "123px" }}>
-        <h1>
-          ARMAGEDDON 2023
-        </h1>
-        <p>
-          ООО “Команда им. Б. Уиллиса”.<br />Взрываем астероиды с 1998 года.
-        </p>
-      </div>
+    <div className={classes.app}>
+      <HeaderTitle observerCallback={observerCallback} />
       <Image
         ref={earthImage}
-        className="my-img"
+        className={classes["my-img"]}
         priority
         src="/planeta_zemlia_2560x1600.jpg"
         width={377}
         height={436}
         alt="earth"
       />
-      <div className="asteroid-list">
+      <div className={classes["asteroid-list"]}>
         <AsteroidList asteroids={asteroids}></AsteroidList>
       </div>
       <div style={{ position: "fixed", top: "134px", right: "-111px" }}>

@@ -8,7 +8,7 @@ module.exports = {
     API_KEY: procces.env.API_KEY
   },
   webpack: (config, options) => {
-    config.plugins.push(new StylelintPlugin());
+    // config.plugins.push(new StylelintPlugin());
     return config;
   }
 };

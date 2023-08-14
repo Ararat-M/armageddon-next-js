@@ -6,6 +6,7 @@ import classes from "./asteroidList.module.scss";
 import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
 import { useFetching } from "@/shared/hooks/useFetching";
 import { Loader } from "@/shared/ui/Loader/Loader";
+import { useObserver } from "@/shared/hooks/useObserver";
 
 interface AsteroidListProps {
   asteroids: AsteroidSchema[];
@@ -44,26 +45,17 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
     }));
   }, [asteroidsArr]);
 
-  useEffect(() => {
-    if (isLoading) return;
-    if (observer.current) observer.current.disconnect();
-
-    function callback (entries: IntersectionObserverEntry[], observer) {
-      if (entries[0].isIntersecting) {
-        fetchAsteroids();
-        console.log(document.body.scrollHeight);
-      }
+  useObserver((entries: IntersectionObserverEntry[], observer) => {
+    if (entries[0].isIntersecting) {
+      fetchAsteroids();
     }
-
-    observer.current = new IntersectionObserver(callback);
-    observer.current.observe(observerTarget.current);
-  }, [date, fetchAsteroids]);
+  }, observerTarget, isLoading);
 
   return (
     <div className={classes.content}>
       <div className={classes.head}>
         <h1 className={classes.title}>
-          Ближайшие подлёты<br /> астероидов
+          Ближайшие подлёты<br />астероидов
         </h1>
         <div>
           <Button
@@ -92,10 +84,7 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
           </div>);
         })}
       </ul>
-      {isLoading
-        ? <div style={{ height: "80px" }}><Loader /></div>
-        : <div style={{ height: "80px" }}></div>}
-      <div ref={observerTarget}></div>
+      <div style={{ height: "80px" }} ref={observerTarget}>{isLoading && <Loader />}</div>
     </div>
   );
 }

@@ -1,27 +1,9 @@
 @import "./reset";
 @import "./variable";
 
-.app {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 10px;
-  background-color: var(--bg-app);
+body {
   min-height: 100vh;
+  background-color: var(--bg-app);
   color: var(--color-main);
   font: var(--font-main);
-  background-repeat: no-repeat;
-  background-position: left top 138px;
-}
-
-.asteroid-list {
-  margin: 0 auto;
-}
-
-.my-img {
-  position: fixed;
-  left: -73px;
-  top: 138px;
-  top: 0;
-  transition: top 0.2s ease-in-out
 }
