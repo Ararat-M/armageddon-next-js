@@ -4,6 +4,12 @@
   --font-size-main: 16px;
   --font-line-main: 24px;
   --font-main: var(--font-size-main) / var(--font-line-main) var(--font-family-main);
+
+  // font-h2
+  --font-size-h2: 28px;
+  --font-line-h2: 36px;
+  --font-weight-h2: 700;
+  --font-h2: var(--font-weight-h2) var(--font-size-h2) / var(--font-line-h2) var(--font-family-main);
   
   // colors
   --bg-app: #000;

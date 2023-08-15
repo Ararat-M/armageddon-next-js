@@ -15,6 +15,8 @@ export default function Index({ asteroids }: IndexProps) {
   const basketRef = useRef<HTMLDivElement>(null);
 
   function observerCallback (entries: IntersectionObserverEntry[]) {
+    if (earthImage.current == null || basketRef.current == null) return;
+
     if (!entries[0].isIntersecting) {
       earthImage.current.style.top = "83px";
       basketRef.current.style.top = "76px";
@@ -31,7 +33,7 @@ export default function Index({ asteroids }: IndexProps) {
       <HeaderTitle observerCallback={observerCallback} />
       <Image
         ref={earthImage}
-        className={classes["my-img"]}
+        className={classes.img}
         priority
         src="/planeta_zemlia_2560x1600.jpg"
         width={377}
@@ -42,7 +44,7 @@ export default function Index({ asteroids }: IndexProps) {
         <AsteroidList asteroids={asteroids}></AsteroidList>
       </div>
       <div ref={basketRef} className={classes.basket}>
-        <Basket count={1} />
+        <Basket />
       </div>
     </div>
   );

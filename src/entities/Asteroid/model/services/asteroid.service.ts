@@ -20,7 +20,7 @@ export const asteroidService = {
   },
 
   async getById(id: string) {
-    const response = await fetch(`${API_URL}/neo${id}&api_key=${API_KEY}`);
+    const response = await fetch(`${API_URL}/neo/${id}?api_key=${API_KEY}`);
     const data: AsteroidSchema = await response.json();
 
     return data;

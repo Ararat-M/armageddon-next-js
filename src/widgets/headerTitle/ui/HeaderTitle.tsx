@@ -9,7 +9,7 @@ interface HeaderTitleProps {
 export function HeaderTitle({ observerCallback }: HeaderTitleProps) {
   const observerTarget = useRef(null);
 
-  useObserver(observerCallback, observerTarget);
+  if (observerCallback) useObserver(observerCallback, observerTarget);
 
   return (
     <div className={classes["text-area"]}>

@@ -10,13 +10,25 @@
   }
 }
 
-.primary {
+.smooth {
   font-weight: 700;
-  background-color: var(--orange-base);
+  background-color: var(--orange-smooth);
+  color: var(--orange-base);
   border-radius: 16px;
   border: none;
 
-  &.smooth {
-    background-color: var(--orange-smooth);
+  &:hover {
+    background-color: var(--orange-base);
+    color: #fff;
   }
+}
+
+.primary {
+  font-weight: 700;
+  background-color: var(--orange-base);
+  border: none;
+}
+
+.disabled {
+  display: none;
 }

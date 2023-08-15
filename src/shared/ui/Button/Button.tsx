@@ -3,7 +3,8 @@ import classes from "./button.module.scss";
 
 export enum ButtonTheme {
   CLEAR = "clear",
-  PRIMARY = "primary"
+  PRIMARY = "primary",
+  SMOOTH = "smooth"
 }
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,7 +19,7 @@ export function Button({
   theme = ButtonTheme.PRIMARY,
   className = "",
   isActive,
-  isSmooth,
+  disabled,
   ...props
 }: ButtonProps) {
   const additionalCls = [
@@ -27,7 +28,7 @@ export function Button({
 
   const mods = {
     [classes.active]: isActive,
-    [classes.smooth]: isSmooth
+    [classes.disabled]: disabled
   };
 
   return (

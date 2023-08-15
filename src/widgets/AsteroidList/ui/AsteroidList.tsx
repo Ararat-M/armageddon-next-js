@@ -54,9 +54,9 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
   return (
     <div className={classes.content}>
       <div className={classes.head}>
-        <h1 className={classes.title}>
+        <h2 className={classes.title}>
           Ближайшие подлёты<br />астероидов
-        </h1>
+        </h2>
         <div>
           <Button
             theme={ButtonTheme.CLEAR}

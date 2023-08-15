@@ -4,18 +4,19 @@ import classes from "./asteroidItem.module.scss";
 import Image from "next/image";
 import { formatName } from "@/shared/lib/formatName/formatName";
 import { formatDateForUi } from "@/shared/lib/formatDateForUi/formatDateForUi";
-import { Button } from "@/shared/ui/Button/Button";
+import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
 import { formatNumber } from "@/shared/lib/formatNumber/formatNumber";
-import { useState } from "react";
-import { BUSKET_KEY } from "@/shared/const/localeStorage";
-import { classNames } from "@/shared/lib/classNames/classNames";
+import { useContext } from "react";
+import { BasketContext } from "@/context";
+import Link from "next/link";
 
 interface AsteroidProps {
   asteroid: AsteroidSchema;
   isDistanceInKm: boolean;
+  btnDisabled?: boolean;
 }
 
-export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
+export function AsteroidItem({ asteroid, isDistanceInKm, btnDisabled = false }: AsteroidProps) {
   const formatData = {
     id: asteroid.id,
     name: formatName(asteroid.name),
@@ -28,11 +29,14 @@ export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
     isDangerous: asteroid.is_potentially_hazardous_asteroid
   };
 
-  const [inBusket, setInBusket] = useState<boolean>(false);
+  const { basket, setBasket } = useContext(BasketContext);
 
   function btnHandler() {
-    setInBusket(true);
-    localStorage.setItem(BUSKET_KEY, formatData.id);
+    if (basket.some((item) => item.id === asteroid.id)) {
+      setBasket(() => basket.filter((item) => item.id !== asteroid.id));
+    } else {
+      setBasket(() => [...basket, asteroid]);
+    }
   }
 
   return (
@@ -63,9 +67,9 @@ export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
             }
           </div>
           <div>
-            <div>
+            <Link href={`/asteroid/${asteroid.id}`}>
               {formatData.name}
-            </div>
+            </Link>
             <div>
               Ø {formatData.diameter}
             </div>
@@ -73,11 +77,12 @@ export function AsteroidItem({ asteroid, isDistanceInKm }: AsteroidProps) {
         </div>
         <div className={classes["btns-area"]}>
           <Button
+            theme={ButtonTheme.SMOOTH}
             className={classes.btn}
-            isSmooth={inBusket}
             onClick={btnHandler}
+            disabled={btnDisabled}
           >
-            Заказать
+            {basket.some((item) => item.id === asteroid.id) ? "В корзине" : "Заказать"}
           </Button>
           {formatData.isDangerous &&
             <span className={classes.label}>

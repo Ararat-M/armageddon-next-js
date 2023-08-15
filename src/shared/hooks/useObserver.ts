@@ -15,5 +15,7 @@ export function useObserver(
 
     observer.current = new IntersectionObserver(observerCallback);
     observer.current.observe(observerTarget.current);
+
+    return () => { observer.current.disconnect(); };
   }, [observerCallback, observer, observerTarget, isLoading]);
 }
