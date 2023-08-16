@@ -1,14 +1,9 @@
-/* eslint-disable */
-const StylelintPlugin = require("stylelint-webpack-plugin");
-const procces = require("process");
-
 module.exports = {
   reactStrictMode: true,
   env: {
-    API_KEY: procces.env.API_KEY
+    API_KEY: "KR0JvLlZaZI5fHACvBB7jx7LeJkzDABgLBccs8Kd"
   },
   webpack: (config, options) => {
-    // config.plugins.push(new StylelintPlugin());
     return config;
   }
 };
