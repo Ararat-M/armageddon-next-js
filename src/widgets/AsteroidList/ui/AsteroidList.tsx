@@ -6,8 +6,7 @@ import { Button, ButtonTheme } from "@/shared/ui/Button/Button";
 import { useFetching } from "@/shared/hooks/useFetching";
 import { Loader } from "@/shared/ui/Loader/Loader";
 import { useObserver } from "@/shared/hooks/useObserver";
-
-const ONE_DAY_IN_MS = 86400000;
+import { ONE_DAY_IN_MS } from "@/shared/const";
 
 interface AsteroidListProps {
   asteroids: AsteroidSchema[];
@@ -16,8 +15,8 @@ interface AsteroidListProps {
 export function AsteroidList({ asteroids }: AsteroidListProps) {
   const [asteroidsArr, setAsteroidsArr] = useState<AsteroidSchema[]>(asteroids);
   const [sortedAsteroids, setSortedAsteroids] = useState<AsteroidSchema[]>([]);
-  const [isDistanceInKm, setIsDistanceInKm] = useState(true);
-  const [date, setDate] = useState(new Date());
+  const [isDistanceInKm, setIsDistanceInKm] = useState<boolean>(true);
+  const [date, setDate] = useState<Date>(new Date());
   const observerTarget = useRef<HTMLDivElement | null>(null);
 
   const [isLoading, Error, fetchAsteroids] = useFetching(async () => {
@@ -47,7 +46,7 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
 
   useObserver((entries) => {
     if (entries[0].isIntersecting) {
-      fetchAsteroids();
+      void fetchAsteroids();
     }
   }, observerTarget, isLoading);
 
@@ -77,11 +76,13 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
       </div>
       <ul className={classes.list}>
         {sortedAsteroids.map((asteroid: AsteroidSchema) => {
-          return (<div
-            key={asteroid.id}
-          >
-            <AsteroidItem asteroid={asteroid} isDistanceInKm={isDistanceInKm}/>
-          </div>);
+          return (
+            <li
+              key={asteroid.id}
+            >
+              <AsteroidItem asteroid={asteroid} isDistanceInKm={isDistanceInKm}/>
+            </li>
+          );
         })}
       </ul>
       <div className={classes.loader} ref={observerTarget}>{isLoading && <Loader />}</div>

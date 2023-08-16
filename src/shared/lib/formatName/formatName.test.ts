@@ -11,7 +11,7 @@ describe("formatName", () => {
   });
 
   test("where invalid string", () => {
-    expect(formatName("Fdf453dfsdf")).toBe("Fdf453dfsdf");
+    expect(formatName("invalidString")).toBe("invalidString");
     expect(formatName("       ")).toBe("");
   });
 });

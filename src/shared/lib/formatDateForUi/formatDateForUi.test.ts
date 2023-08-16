@@ -10,7 +10,7 @@ describe("formatDateForUi", () => {
   });
 
   test("where invalid string", () => {
-    expect(formatDateForUi("Fdf453dfsdf")).toBe("Fdf453dfsdf");
+    expect(formatDateForUi("invalidString")).toBe("invalidString");
     expect(formatDateForUi("       ")).toBe("");
   });
 });

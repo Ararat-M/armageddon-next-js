@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-indent-props */
 import type { AsteroidSchema } from "@/entities/Asteroid";
 import classes from "./asteroidItem.module.scss";
 import Image from "next/image";
@@ -40,7 +39,7 @@ export function AsteroidItem({ asteroid, isDistanceInKm, btnDisabled = false }: 
   }
 
   return (
-    <li className={classes.content}>
+    <div className={classes.content}>
       <h3 className={classes.date}>{formatData.date}</h3>
       <div>
         <div className={classes.info}>
@@ -61,20 +60,21 @@ export function AsteroidItem({ asteroid, isDistanceInKm, btnDisabled = false }: 
             </div>
           </div>
           <div>
-            {formatData.diameter < 200
-              ? <Image
+            {formatData.diameter < 200 ? (
+              <Image
                 src="/asteroid.png"
                 width={22}
                 height={24}
                 alt="small asteroid"
               />
-              : <Image
+            ) : (
+              <Image
                 src="/asteroid.png"
                 width={36}
                 height={40}
                 alt="big asteroid"
               />
-            }
+            )}
           </div>
           <div>
             <Link className={classes.link} href={`/asteroid/${asteroid.id}`}>
@@ -102,6 +102,6 @@ export function AsteroidItem({ asteroid, isDistanceInKm, btnDisabled = false }: 
           }
         </div>
       </div>
-    </li>
+    </div>
   );
 }

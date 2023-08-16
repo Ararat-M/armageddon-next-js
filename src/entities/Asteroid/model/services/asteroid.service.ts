@@ -6,23 +6,31 @@ const API_URL = "https://api.nasa.gov/neo/rest/v1";
 
 export const asteroidService = {
   async getByDate(date: Date) {
-    const formatDate = formatDateForApi(date);
-    const response = await fetch(`${API_URL}/feed?start_date=${formatDate}&end_date=${formatDate}&api_key=${API_KEY}`);
-    const data = await response.json();
+    try {
+      const formatDate = formatDateForApi(date);
+      const response = await fetch(`${API_URL}/feed?start_date=${formatDate}&end_date=${formatDate}&api_key=${API_KEY}`);
+      const data = await response.json();
 
-    const asteroids: AsteroidSchema[] = [];
+      const asteroids: AsteroidSchema[] = [];
 
-    data.near_earth_objects[formatDate].forEach((item: AsteroidSchema) => {
-      asteroids.push(item);
-    });
+      data.near_earth_objects[formatDate].forEach((item: AsteroidSchema) => {
+        asteroids.push(item);
+      });
 
-    return asteroids;
+      return asteroids;
+    } catch (error) {
+      console.error(error.message);
+    }
   },
 
   async getById(id: string) {
-    const response = await fetch(`${API_URL}/neo/${id}?api_key=${API_KEY}`);
-    const data: AsteroidSchema = await response.json();
+    try {
+      const response = await fetch(`${API_URL}/neo/${id}?api_key=${API_KEY}`);
+      const data: AsteroidSchema = await response.json();
 
-    return data;
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
