@@ -84,7 +84,7 @@ export function AsteroidList({ asteroids }: AsteroidListProps) {
           </div>);
         })}
       </ul>
-      <div style={{ height: "80px" }} ref={observerTarget}>{isLoading && <Loader />}</div>
+      <div className={classes.loader} ref={observerTarget}>{isLoading && <Loader />}</div>
     </div>
   );
 }

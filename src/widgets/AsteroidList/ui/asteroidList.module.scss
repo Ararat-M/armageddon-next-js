@@ -13,3 +13,14 @@
  row-gap: 24px;
  margin-bottom: 20px;
 }
+
+.loader {
+  height: 80px;
+}
+
+
+@media screen and (max-width: 705px) {
+  .loader {
+    margin-bottom: 90px;
+  }
+}
