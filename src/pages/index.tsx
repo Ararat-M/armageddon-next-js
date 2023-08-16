@@ -15,7 +15,7 @@ export default function Index({ asteroids }: IndexProps) {
   const mobile = useMediaQuery("(min-width:706px)");
 
   function inVisibility() {
-    if (basketRef.current == null || mobile) return;
+    if (basketRef.current == null) return;
 
     mobile
       ? basketRef.current.style.top = "83px"

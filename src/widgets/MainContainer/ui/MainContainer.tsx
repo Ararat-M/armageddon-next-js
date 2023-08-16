@@ -19,7 +19,7 @@ export function MainContainer({
 }: MainContainerProps) {
   const observerTarget = useRef(null);
   const earthImage = useRef<HTMLImageElement>(null);
-  const mobile = useMediaQuery("(min-width:415px)");
+  const mobile = useMediaQuery("(min-width:706px)");
 
   function inVisibilityDefault() {
     inVisibility();
@@ -27,8 +27,8 @@ export function MainContainer({
     if (!defaultObserver || earthImage.current == null) return;
 
     mobile
-      ? earthImage.current.style.top = "115px"
-      : earthImage.current.style.top = "83px";
+      ? earthImage.current.style.top = "83px"
+      : earthImage.current.style.top = "115px";
   }
 
   function notInVisibilityDefault() {
@@ -37,8 +37,8 @@ export function MainContainer({
     if (!defaultObserver || earthImage.current == null) return;
 
     mobile
-      ? earthImage.current.style.top = "123px"
-      : earthImage.current.style.top = "138px";
+      ? earthImage.current.style.top = "138px"
+      : earthImage.current.style.top = "123px";
   }
 
   useObserver((entries: IntersectionObserverEntry[]) => {
