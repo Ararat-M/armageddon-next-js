@@ -57,7 +57,7 @@
   }
 
   .info {
-    transform: translateY(-70px);
+    transform: translateY(-80px);
     display: flex;
     flex-direction: column;
     row-gap: 12px;
@@ -67,5 +67,6 @@
 
   .close-approach-list {
     margin-top: 0px;
+    transform: translateY(-30px);
   }
 }
