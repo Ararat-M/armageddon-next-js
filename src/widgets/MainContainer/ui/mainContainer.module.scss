@@ -8,3 +8,11 @@
 .text-area{ 
   padding: 16px 0 16px 16px;
 }
+
+.img {
+  position: fixed;
+  left: -73px;
+  top: 138px;
+  transition: top 0.2s ease-in-out;
+  z-index: var(--image-bg);
+}
