@@ -44,8 +44,8 @@ export default function Asteroid({ asteroid }: AsteroidProps) {
         className={classes.img}
         priority
         src="/asteroid-icon.svg"
-        width={400}
-        height={400}
+        width={375}
+        height={375}
         alt="asteroid"
       />
       <div className={classes.info}>
@@ -67,15 +67,15 @@ export default function Asteroid({ asteroid }: AsteroidProps) {
               key={approach.close_approach_date}
               className={classes["close-approach-info"]}
             >
-              <div className={classes["close-approach-date"]}>{approach.close_approach_date}</div>
+              <div className={classes["close-approach-date"]}>{formatDateForUi(approach.close_approach_date)}</div>
               <div>
-                Относительная скорость {parseInt(approach.relative_velocity.kilometers_per_hour)} км/ч
+                Относительная скорость {formatNumber(parseInt(approach.relative_velocity.kilometers_per_hour))} км/ч
               </div>
               <div>
-                Расстояние до Земли {Math.round(approach.miss_distance.kilometers)} км
+                Расстояние до Земли {formatNumber(Math.round(approach.miss_distance.kilometers))} км
               </div>
               <div>
-                Вращаеться по орбите {AsteroidOrbit[approach.orbiting_body]}
+                Вращается по орбите {AsteroidOrbit[approach.orbiting_body]}
               </div>
             </div>
           );
