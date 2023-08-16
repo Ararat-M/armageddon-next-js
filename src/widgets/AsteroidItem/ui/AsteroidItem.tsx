@@ -49,6 +49,16 @@ export function AsteroidItem({ asteroid, isDistanceInKm, btnDisabled = false }: 
               ? <span>{formatData.distance.kilometers} км</span>
               : <span>{formatData.distance.lunar} лунных орбит</span>
             }
+            <div>
+              <Image
+                src="/arrow.svg"
+                alt="arrow"
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
           </div>
           <div>
             {formatData.diameter < 200
