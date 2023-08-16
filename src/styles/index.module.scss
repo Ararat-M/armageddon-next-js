@@ -5,7 +5,7 @@
 }
 
 .asteroid-list {
-  margin: 0 auto;
+  margin: 9px auto;
 }
 
 .basket {
@@ -13,4 +13,32 @@
   top: 132px;
   right: 111px;
   transition: top 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 860px) {
+  .basket {
+    right: 40px;
+  }
+}
+
+@media screen and (max-width: 705px) {
+  .asteroid-list {
+    margin-top: 17px;
+  }
+
+  .basket {
+    width: 100%;
+    position: fixed;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: 0px;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .asteroid-list {
+    margin-right: 24px;
+    max-width: 279px;
+  }
 }

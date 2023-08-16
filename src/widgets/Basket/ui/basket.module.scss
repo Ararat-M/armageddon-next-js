@@ -13,3 +13,19 @@
   background-color: var(--orange-base);
   color:#fff;
 }
+
+@media screen and (max-width: 705px) {
+  .basket {
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 0px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .basket {
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 0px;
+  }
+}

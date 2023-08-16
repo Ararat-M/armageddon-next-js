@@ -16,3 +16,10 @@
   transition: top 0.2s ease-in-out;
   z-index: var(--image-bg);
 }
+
+@media screen and (max-width: 980px) {
+  .img {
+    top: 112px;
+    left: -329px;
+  }
+}

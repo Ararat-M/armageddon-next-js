@@ -4,7 +4,6 @@ import "@/styles/global.scss";
 import "@/styles/index.module.scss";
 import { BasketContext } from "@/context";
 import { useState } from "react";
-import Image from "next/image";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [basket, setBasket] = useState([]);

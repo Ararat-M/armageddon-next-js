@@ -1,13 +1,14 @@
 import { useObserver } from "@/shared/hooks/useObserver";
-import { type MutableRefObject, useRef } from "react";
+import { useRef } from "react";
 import classes from "./mainContainer.module.scss";
 import Image from "next/image";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface MainContainerProps {
   children: React.ReactNode;
   defaultObserver?: boolean;
-  inVisibility?: (...args: Array<MutableRefObject<any>>) => void;
-  notInVisibility?: (...args: Array<MutableRefObject<any>>) => void;
+  inVisibility?: () => void;
+  notInVisibility?: () => void;
 }
 
 export function MainContainer({
@@ -18,13 +19,16 @@ export function MainContainer({
 }: MainContainerProps) {
   const observerTarget = useRef(null);
   const earthImage = useRef<HTMLImageElement>(null);
+  const mobile = useMediaQuery("(min-width:415px)");
 
   function inVisibilityDefault() {
     inVisibility();
 
     if (!defaultObserver || earthImage.current == null) return;
 
-    earthImage.current.style.top = "83px";
+    mobile
+      ? earthImage.current.style.top = "115px"
+      : earthImage.current.style.top = "83px";
   }
 
   function notInVisibilityDefault() {
@@ -32,7 +36,9 @@ export function MainContainer({
 
     if (!defaultObserver || earthImage.current == null) return;
 
-    earthImage.current.style.top = "138px";
+    mobile
+      ? earthImage.current.style.top = "123px"
+      : earthImage.current.style.top = "138px";
   }
 
   useObserver((entries: IntersectionObserverEntry[]) => {
@@ -68,6 +74,5 @@ export function MainContainer({
         {children}
       </>
     </>
-
   );
 }

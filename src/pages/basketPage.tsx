@@ -20,6 +20,7 @@ export default function BasketPage() {
             )}
           </ul>
         </div>
+        <span className={classes.footer}>© Все права и планета защищены</span>
       </MainContainer>
     </div>
   );

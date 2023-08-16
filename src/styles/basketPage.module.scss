@@ -1,6 +1,7 @@
 .basket {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .title {
@@ -18,10 +19,8 @@
   row-gap: 24px;
 }
 
-.img {
-  position: absolute;
-  left: -73px;
-  top: 138px;
-  transition: top 0.2s ease-in-out;
-  z-index: var(--image-bg);
+.footer {
+  width: 100%;
+  padding: 16px;
+  margin-top: auto;
 }

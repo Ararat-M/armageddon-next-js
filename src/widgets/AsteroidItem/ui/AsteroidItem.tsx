@@ -67,7 +67,7 @@ export function AsteroidItem({ asteroid, isDistanceInKm, btnDisabled = false }: 
             }
           </div>
           <div>
-            <Link href={`/asteroid/${asteroid.id}`}>
+            <Link className={classes.link} href={`/asteroid/${asteroid.id}`}>
               {formatData.name}
             </Link>
             <div>

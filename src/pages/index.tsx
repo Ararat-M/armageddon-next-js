@@ -4,6 +4,7 @@ import { useRef } from "react";
 import classes from "@/styles/index.module.scss";
 import { Basket } from "@/widgets/Basket";
 import { MainContainer } from "@/widgets/MainContainer/ui/MainContainer";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface IndexProps {
   asteroids: AsteroidSchema[];
@@ -11,15 +12,22 @@ interface IndexProps {
 
 export default function Index({ asteroids }: IndexProps) {
   const basketRef = useRef<HTMLDivElement>(null);
+  const mobile = useMediaQuery("(min-width:706px)");
 
   function inVisibility() {
-    if (basketRef.current == null) return;
-    basketRef.current.style.top = "83px";
+    if (basketRef.current == null || mobile) return;
+
+    mobile
+      ? basketRef.current.style.top = "83px"
+      : basketRef.current.style.top = "auto";
   }
 
   function notInVisibility() {
     if (basketRef.current == null) return;
-    basketRef.current.style.top = "138px";
+
+    mobile
+      ? basketRef.current.style.top = "132px"
+      : basketRef.current.style.top = "auto";
   }
 
   return (
