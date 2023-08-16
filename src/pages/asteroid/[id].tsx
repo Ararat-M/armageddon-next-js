@@ -4,6 +4,7 @@ import { formatDateForUi } from "@/shared/lib/formatDateForUi/formatDateForUi";
 import { formatName } from "@/shared/lib/formatName/formatName";
 import { formatNumber } from "@/shared/lib/formatNumber/formatNumber";
 import Image from "next/image";
+import { Meta } from "@/meta";
 
 interface AsteroidProps {
   asteroid: AsteroidSchema;
@@ -39,7 +40,7 @@ export default function Asteroid({ asteroid }: AsteroidProps) {
   };
 
   return (
-    <>
+    <Meta title={"Asteroid " + formatData.name}>
       <Image
         className={classes.img}
         priority
@@ -81,7 +82,7 @@ export default function Asteroid({ asteroid }: AsteroidProps) {
           );
         })}
       </div>
-    </>
+    </Meta>
   );
 }
 

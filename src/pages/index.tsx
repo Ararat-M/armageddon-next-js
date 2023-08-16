@@ -3,8 +3,9 @@ import { AsteroidList } from "@/widgets/AsteroidList";
 import { useRef } from "react";
 import classes from "@/styles/index.module.scss";
 import { Basket } from "@/widgets/Basket";
-import { MainContainer } from "@/widgets/MainContainer/ui/MainContainer";
+import { MainContainer } from "@/widgets/MainContainer";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { Meta } from "@/meta";
 
 interface IndexProps {
   asteroids: AsteroidSchema[];
@@ -14,7 +15,7 @@ export default function Index({ asteroids }: IndexProps) {
   const basketRef = useRef<HTMLDivElement>(null);
   const mobile = useMediaQuery("(min-width:706px)");
 
-  function inVisibility() {
+  function titleInVisibility() {
     if (basketRef.current == null) return;
 
     mobile
@@ -22,7 +23,7 @@ export default function Index({ asteroids }: IndexProps) {
       : basketRef.current.style.top = "auto";
   }
 
-  function notInVisibility() {
+  function titleNotInVisibility() {
     if (basketRef.current == null) return;
 
     mobile
@@ -31,19 +32,21 @@ export default function Index({ asteroids }: IndexProps) {
   }
 
   return (
-    <div className={classes.app}>
-      <MainContainer
-        inVisibility={inVisibility}
-        notInVisibility={notInVisibility}
-      >
-        <div className={classes["asteroid-list"]}>
-          <AsteroidList asteroids={asteroids}></AsteroidList>
-        </div>
-        <div ref={basketRef} className={classes.basket}>
-          <Basket />
-        </div>
-      </MainContainer>
-    </div>
+    <Meta title="Главная" description="Destroy Asteroids!">
+      <div className={classes.app}>
+        <MainContainer
+          titleInVisibility={titleInVisibility}
+          titleNotInVisibility={titleNotInVisibility}
+        >
+          <div className={classes["asteroid-list"]}>
+            <AsteroidList asteroids={asteroids}></AsteroidList>
+          </div>
+          <div ref={basketRef} className={classes.basket}>
+            <Basket />
+          </div>
+        </MainContainer>
+      </div>
+    </Meta>
   );
 }
 

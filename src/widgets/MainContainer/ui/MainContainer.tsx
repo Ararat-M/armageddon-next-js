@@ -7,22 +7,22 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 interface MainContainerProps {
   children: React.ReactNode;
   defaultObserver?: boolean;
-  inVisibility?: () => void;
-  notInVisibility?: () => void;
+  titleInVisibility?: () => void;
+  titleNotInVisibility?: () => void;
 }
 
 export function MainContainer({
   children,
   defaultObserver = true,
-  notInVisibility = () => {},
-  inVisibility = () => {}
+  titleNotInVisibility = () => {},
+  titleInVisibility = () => {}
 }: MainContainerProps) {
   const observerTarget = useRef(null);
   const earthImage = useRef<HTMLImageElement>(null);
   const mobile = useMediaQuery("(min-width:706px)");
 
-  function inVisibilityDefault() {
-    inVisibility();
+  function titleInVisibilityDefault() {
+    titleInVisibility();
 
     if (!defaultObserver || earthImage.current == null) return;
 
@@ -31,8 +31,8 @@ export function MainContainer({
       : earthImage.current.style.top = "115px";
   }
 
-  function notInVisibilityDefault() {
-    notInVisibility();
+  function titleNotInVisibilityDefault() {
+    titleNotInVisibility();
 
     if (!defaultObserver || earthImage.current == null) return;
 
@@ -43,11 +43,11 @@ export function MainContainer({
 
   useObserver((entries: IntersectionObserverEntry[]) => {
     if (!entries[0].isIntersecting) {
-      inVisibilityDefault();
+      titleInVisibilityDefault();
     }
 
     if (entries[0].isIntersecting) {
-      notInVisibilityDefault();
+      titleNotInVisibilityDefault();
     }
   }, observerTarget);
 
