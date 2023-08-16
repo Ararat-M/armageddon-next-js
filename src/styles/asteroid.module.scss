@@ -11,7 +11,6 @@
   row-gap: 12px;
   margin-top: 20px;
   margin-left: 400px;
-
 }
 
 .name {
@@ -21,4 +20,21 @@
 
 .colorful-symbol {
   margin-left: 10px;
+}
+
+@media screen and (max-width: 799px) {
+  .img {
+    position: static;
+    transform: translateY(-40px);
+    z-index: var(--image-bg);
+  }
+
+  .info {
+    transform: translateY(-80px);
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    margin-top: 0px;
+    margin-left: 30px;
+  }
 }

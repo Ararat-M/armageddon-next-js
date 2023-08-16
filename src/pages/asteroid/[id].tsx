@@ -28,7 +28,15 @@ export default function Asteroid({ asteroid }: AsteroidProps) {
   };
 
   return (
-    <div>
+    <>
+      <Image
+        className={classes.img}
+        priority
+        src="/asteroid-icon.svg"
+        width={400}
+        height={400}
+        alt="asteroid"
+      />
       <div className={classes.info}>
         <h2 className={classes.name}>
           {formatData.name}
@@ -41,15 +49,7 @@ export default function Asteroid({ asteroid }: AsteroidProps) {
         <div>Диаметр: {formatData.diameter} м.</div>
         <div>тип класса орбиты: {formatData.orbit_class_type}</div>
       </div>
-      <Image
-        className={classes.img}
-        priority
-        src="/asteroid-icon.svg"
-        width={400}
-        height={400}
-        alt="asteroid"
-      />
-    </div>
+    </>
   );
 }
 
