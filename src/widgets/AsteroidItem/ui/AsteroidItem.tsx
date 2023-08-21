@@ -8,6 +8,7 @@ import { formatNumber } from "@/shared/lib/formatNumber/formatNumber";
 import { useContext } from "react";
 import { BasketContext } from "@/context";
 import Link from "next/link";
+import { setDeclination } from "@/shared/lib/setDeclination/setDeclination";
 
 interface AsteroidProps {
   asteroid: AsteroidSchema;
@@ -22,7 +23,7 @@ export function AsteroidItem({ asteroid, isDistanceInKm, btnDisabled = false }: 
     date: formatDateForUi(asteroid.close_approach_data[0].close_approach_date),
     diameter: Math.round(asteroid.estimated_diameter.meters.estimated_diameter_max),
     distance: {
-      lunar: formatNumber(asteroid.close_approach_data[0].miss_distance.lunar),
+      lunar: Number(formatNumber(asteroid.close_approach_data[0].miss_distance.lunar)),
       kilometers: formatNumber(asteroid.close_approach_data[0].miss_distance.kilometers)
     },
     isDangerous: asteroid.is_potentially_hazardous_asteroid
@@ -46,7 +47,7 @@ export function AsteroidItem({ asteroid, isDistanceInKm, btnDisabled = false }: 
           <div>
             {isDistanceInKm
               ? <span>{formatData.distance.kilometers} км</span>
-              : <span>{formatData.distance.lunar} лунных орбит</span>
+              : <span>{setDeclination(formatData.distance.lunar, ["лунная орбита", "лунные орбиты", "лунных орбит"])}</span>
             }
             <div>
               <Image

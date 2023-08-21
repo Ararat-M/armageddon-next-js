@@ -4,6 +4,7 @@ import { classNames } from "@/shared/lib/classNames/classNames";
 import { useContext } from "react";
 import { BasketContext } from "@/context";
 import Link from "next/link";
+import { setDeclination } from "@/shared/lib/setDeclination/setDeclination";
 
 export function Basket() {
   const { basket } = useContext(BasketContext);
@@ -14,7 +15,7 @@ export function Basket() {
     <div className={classes.basket}>
       <span>
         Корзина<br />
-        {basket.length} {basket.length === 1 ? "астероид" : "астероидов"}
+        {setDeclination(basket.length, ["астероид", "астероида", "астероидов"])}
       </span>
       <Link href={"/basketPage"}>
         <Button
